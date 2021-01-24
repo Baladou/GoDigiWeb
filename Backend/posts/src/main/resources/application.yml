@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: microservice-posts
+server:
+  port: 8001
+
+security:
+  basic:
+    enable: false
+  data:
+    mongodb:
+      database: posts_db
+
+
+
+
+
+
+
+
+
