@@ -4,6 +4,10 @@ const connectDB = require('./config/db');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const authRouter = require('./routes/authRouter');
+const eurekaHelper = require('./eureka-helper');
+
+
+
 
 
 //get access to process.env
@@ -34,3 +38,5 @@ const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
 });
+
+eurekaHelper.registerWithEureka('auth-service', PORT);
