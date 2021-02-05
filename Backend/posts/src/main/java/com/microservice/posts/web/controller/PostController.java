@@ -1,6 +1,8 @@
 package com.microservice.posts.web.controller;
 
 
+import com.microservice.posts.config.BearerTokenInterceptor;
+
 import com.microservice.posts.dao.PostdaoImp;
 import com.microservice.posts.model.Post;
 import com.microservice.posts.payload.ApiResponse;
@@ -31,14 +33,27 @@ public class PostController {
     @Autowired
     private PostdaoImp postService;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     @PostMapping("/posts")
     public ResponseEntity<?> createPost(
                                         @RequestParam("caption")  String caption,
-                                        final @RequestParam("image") MultipartFile image ) throws IOException {
+                                        final @RequestParam("image") MultipartFile image,@RequestParam("email")  String email ) throws IOException {
 
 
 
-        Post post = postService.createPost(image,caption);
+        Post post = postService.createPost(email,image,caption);
 
 
         URI location = ServletUriComponentsBuilder
@@ -64,15 +79,7 @@ public class PostController {
         Post post=postService.postsById(id);
         return ResponseEntity.ok(post);
     }
-    @GetMapping("/posts")
-    public ResponseEntity<?> findAllPosts() {
 
-
-        List<Post> posts = postService.Allposts();
-        log.info("found {} posts for user {}",posts);
-
-        return ResponseEntity.ok(posts);
-    }
 
 
 
@@ -88,17 +95,17 @@ public class PostController {
     }
 
 */
-    @GetMapping("/posts/{username}")
-    public ResponseEntity<?> findUserPosts(@PathVariable("username") String username) {
-        log.info("retrieving posts for user {}", username);
+    @GetMapping("/posts/{email}")
+    public ResponseEntity<?> findUserPosts(@PathVariable("email") String email) {
+        log.info("retrieving posts for user {}", email);
 
-        List<Post> posts = postService.postsByUsername(username);
-        log.info("found {} posts for user {}", posts.size(), username);
+        List<Post> posts = postService.postsByEmail(email);
+        log.info("found {} posts for user {}", posts.size(), email);
 
         return ResponseEntity.ok(posts);
     }
 
-    @PostMapping("/posts/in")
+    /*@PostMapping("/posts/in")
     public ResponseEntity<?> findPostsByIdIn(@RequestBody List<String> ids) {
         log.info("retrieving posts for {} ids", ids.size());
 
@@ -106,13 +113,13 @@ public class PostController {
         log.info("found {} posts", posts.size());
 
         return ResponseEntity.ok(posts);
-    }
+    }*/
 
     @PutMapping("/posts/{id}")
     public ResponseEntity<?> updatePost( @RequestParam("caption")  String caption,
-                              final @RequestParam("image") MultipartFile image, @PathVariable("id") String id) {
+                              final @RequestParam("image") MultipartFile image, @PathVariable("id") String id,@RequestParam("email")  String email) {
 
-        Post post = postService.updatePost(id,image,caption);
+        Post post = postService.updatePost(id,image,caption,email);
         return ResponseEntity.ok(post);
     }
 

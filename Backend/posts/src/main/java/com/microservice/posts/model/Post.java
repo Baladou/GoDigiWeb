@@ -23,12 +23,15 @@ public class Post {
     @LastModifiedDate
     private Instant updatedAt;
 
+
     @CreatedBy
     private String username;
 
     @LastModifiedBy
     private String lastModifiedBy;
 
+    @NonNull
+    private String email;
     @NonNull
     private String imageUrl; //for now post will contain only one image
 
