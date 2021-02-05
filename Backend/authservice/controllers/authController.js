@@ -24,11 +24,9 @@ exports.signUpController= (req,res)=>{
 
   const{name, email, password}= req.body;
   const errors=validationResult(req);
-  console.log("fghjk")
 
 
   if(!errors.isEmpty()){
-    console.log("fghjk")
     const firstError=errors.array().map(error= error.message)[0];
     return res.status(422).json({
       errors: firstError
@@ -36,8 +34,6 @@ exports.signUpController= (req,res)=>{
   }
 
   else{
-    console.log("fghjk")
-
 
     User.findOne({email})
     .exec((err, user)=>{
@@ -86,7 +82,7 @@ exports.signUpController= (req,res)=>{
       if (error) {
         return res.status(400).json({
           success: false,
-          errors:error
+          errors:errorHandler(error)
           
         });
       } else {
