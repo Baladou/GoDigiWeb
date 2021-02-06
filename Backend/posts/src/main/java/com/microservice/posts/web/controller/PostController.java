@@ -1,29 +1,21 @@
 package com.microservice.posts.web.controller;
 
 
-import com.microservice.posts.config.BearerTokenInterceptor;
-
 import com.microservice.posts.dao.PostdaoImp;
 import com.microservice.posts.model.Post;
 import com.microservice.posts.payload.ApiResponse;
-import com.microservice.posts.payload.PostRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.*;
 import java.net.URI;
-import java.nio.file.Paths;
-import java.security.Principal;
-import java.time.Instant;
-import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -68,9 +60,9 @@ public class PostController {
 
     @DeleteMapping("/posts/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePost(@PathVariable("id") String id/*@AuthenticationPrincipal Principal user*/) {
+    public void deletePost(@PathVariable("id") String id,@PathVariable("email") String email/*@AuthenticationPrincipal Principal user*/) {
         log.info("received a delete request for post id {} from user {}", id);
-        postService.deletePost(id,"Zineb");
+        postService.deletePost(id,email);
     }
 
     @GetMapping("/OnePost/posts/{id}")
