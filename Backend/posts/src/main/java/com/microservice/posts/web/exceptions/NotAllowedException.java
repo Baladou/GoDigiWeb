@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.FORBIDDEN)
 public class NotAllowedException extends RuntimeException {
 
-    public NotAllowedException(String user, String resource, String operation) {
+    public NotAllowedException(String email, String resource, String operation) {
         super(String.format("user %s is not allowed to %s resource %s",
-                user, operation, resource));
+                email, operation, resource));
     }
 }
