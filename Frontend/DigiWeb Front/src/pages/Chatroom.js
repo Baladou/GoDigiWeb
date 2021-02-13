@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-const HomeCommande = ({ match, socket }) => {
+const Chatroom = ({ match, socket }) => {
   const chatroomId = match.params.id;
   const [messages, setMessages] = React.useState([]);
   const messageRef = React.useRef();
@@ -89,4 +89,4 @@ const HomeCommande = ({ match, socket }) => {
   );
 };
 
-export default withRouter(HomeCommande);
+export default withRouter(Chatroom);

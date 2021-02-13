@@ -10,14 +10,14 @@ class Footer extends Component {
               <div className="col-lg-12">
                 <div className="footer__widget">
                   <div className="footer__widget__social ">
-                    <h6> SUIVEZ NOUS {"  "} </h6>
-                    <a href="https://www.facebook.com/Association.nationale.ovine.et.caprine/">
+                    <h6> DIGIWEB {"  "} </h6>
+                    <a href="#">
                       <i id="facebook" className="fa fa-facebook"></i>
                     </a>
                     <a href="#">
                       <i id="twitter" className="fa fa-twitter"></i>
                     </a>
-                    <a href="https://www.youtube.com/channel/UCzX4064MubkoUVL1ecFDGpQ">
+                    <a href="#">
                       <i id="youtube" className="fa fa-youtube"></i>
                     </a>
                   </div>

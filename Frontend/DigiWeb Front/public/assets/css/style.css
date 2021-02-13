@@ -522,12 +522,12 @@ ol {
 }
 
 .site-btn {
-	font-size: 14px;
+	font-size: 18px;
 	color: #ffffff;
 	font-weight: 800;
 	text-transform: uppercase;
 	display: inline-block;
-	padding: 13px 30px 12px;
+	padding: 12px 60px;
 	background: #318ce7;
 	border: none;
 }
@@ -4218,11 +4218,12 @@ input:focus {
 }
 
 button {
+	font-size: 12px;
   background: #318ce7;
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 2px;
-  width: 100%;
+  width: 50%;
   text-transform: uppercase;
 }
 

@@ -8,12 +8,12 @@ import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import ReactPaginate from "react-paginate";
 import { FacebookProvider, Like, ShareButton, MessageUs } from "react-facebook";
 
-class HomeSheeps extends Component {
+class Accueil extends Component {
   constructor() {
     super();
     // let redirect = false;
     this.state = {
-      loading : true,
+      loading: true,
       activePage: 1,
       nombrePages: [],
       currentPage: 1,
@@ -190,34 +190,32 @@ class HomeSheeps extends Component {
     // created_date.getTime();
     const sortProperty = Object.values(e)[0];
     const sorted = this.state.Annonces;
-    if (sortProperty === "prix" || sortProperty === "poids") { 
+    if (sortProperty === "prix" || sortProperty === "poids") {
       this.setState({ loading: true }, () => {
-      sorted.sort((a, b) => a[sortProperty] - b[sortProperty]);
-      this.setState({ Annonces: sorted,
-      loading : false });
-    });
+        sorted.sort((a, b) => a[sortProperty] - b[sortProperty]);
+        this.setState({ Annonces: sorted, loading: false });
+      });
     } else if (sortProperty === "prix_dec") {
       const sort_ = "prix";
       this.setState({ loading: true }, () => {
-      sorted.sort((a, b) => b[sort_] - a[sort_]);
-      this.setState({ Annonces: sorted, loading: false });
+        sorted.sort((a, b) => b[sort_] - a[sort_]);
+        this.setState({ Annonces: sorted, loading: false });
       });
     } else if (sortProperty === "poids_dec") {
       const sort_ = "poids";
       this.setState({ loading: true }, () => {
-      sorted.sort((a, b) => b[sort_] - a[sort_]);
-      this.setState({ Annonces: sorted, loading: false });
+        sorted.sort((a, b) => b[sort_] - a[sort_]);
+        this.setState({ Annonces: sorted, loading: false });
       });
     } else {
       console.log(sortProperty);
       this.setState({ loading: true }, () => {
-      sorted.sort(
-        function(a, b){
+        sorted.sort(function (a, b) {
           console.log(a[sortProperty]);
-          console.log(new Date (a[sortProperty]));
-         return new Date(b[sortProperty]) - new Date(a[sortProperty]);
-        } );
-      this.setState({ Annonces: sorted, loading: false });
+          console.log(new Date(a[sortProperty]));
+          return new Date(b[sortProperty]) - new Date(a[sortProperty]);
+        });
+        this.setState({ Annonces: sorted, loading: false });
       });
     }
     console.log(this.state.Annonces);
@@ -229,7 +227,7 @@ class HomeSheeps extends Component {
   }*/
 
   handelChercher() {
-   this.setState({ loading: true }, () => {
+    this.setState({ loading: true }, () => {
       axios
         .get("http://127.0.0.1:8000/api/Espece", {
           headers: {
@@ -241,22 +239,20 @@ class HomeSheeps extends Component {
         .then((res) => {
           this.setState({
             Annonces: res.data,
-            loading : false,
+            loading: false,
           });
-                const pageNumbers = [];
-                for (
-                  let i = 1;
-                  i <=
-                  Math.ceil(
-                    this.state.Annonces.length / this.state.annoncesPerPage
-                  );
-                  i++
-                ) {
-                  pageNumbers.push(i);
-                }
-                this.setState({ nombrePages: pageNumbers });
+          const pageNumbers = [];
+          for (
+            let i = 1;
+            i <=
+            Math.ceil(this.state.Annonces.length / this.state.annoncesPerPage);
+            i++
+          ) {
+            pageNumbers.push(i);
+          }
+          this.setState({ nombrePages: pageNumbers });
         });
-       });
+    });
   }
 
   annonceVision(a) {
@@ -306,7 +302,7 @@ class HomeSheeps extends Component {
     const { selectedOptionVille } = this.state;
     const { optionsVille } = this.state;
     const { optionsSort } = this.state;
-    const {loading} = this.state;
+    const { loading } = this.state;
     return (
       <div>
         {/* <!-- Page Preloder --> */}
@@ -339,7 +335,7 @@ class HomeSheeps extends Component {
                     <br></br>
 
                     <h6 id="gras" className="latest-product__item">
-                      <a id="Accbar" href="./HomeEleveur">
+                      <a id="Accbar" href="./creerChatroom">
                         Créer Discussion
                       </a>
                     </h6>
@@ -347,13 +343,11 @@ class HomeSheeps extends Component {
                     <br></br>
 
                     <h6 id="gras" className="latest-product__item">
-                      <a id="Accbar" href="./Description">
+                      <a id="Accbar" href="./ModifierProfile">
                         Modifier Profile
                       </a>
                     </h6>
                     <br></br>
-
-                  
 
                     <br></br>
 
@@ -410,24 +404,6 @@ class HomeSheeps extends Component {
                 </div>
 
                 <div className="filter__item">
-                  {/** 
-                  <div>
-                    <div id="filterPlace" className="col-lg-5 col-md-5 fa ">
-                      <Select
-                        id="filterPlace"
-                        value={this.state.selectedOptionSort}
-                        onChange={this.sortData}
-                        options={optionsSort}
-                        placeholder="&#xf161;"
-                        //
-                        //f0b0
-
-                        // className="Select"
-                      />
-                    </div>
-                  </div>
-                  */}
-
                   <br></br>
                   <div className="row">
                     <div className="col-lg-12 col-md-12">
@@ -470,16 +446,6 @@ class HomeSheeps extends Component {
                         />
 
                         <ul class="product__item__pic__hover">
-                          {/* <li>
-                              <a
-                                id={Annonces._id}
-                                onClick={(e) =>
-                                  this.handleFavoris(e.currentTarget.id)
-                                }
-                              >
-                                <i className="fa fa-heart"></i>
-                              </a>
-                            </li> */}
                           <li>
                             <Link to={`/DetailsMouton/`}>
                               <a href="#">
@@ -490,8 +456,8 @@ class HomeSheeps extends Component {
                         </ul>
                       </div>
                       <div class="product__item__text">
-                        <h6>HtHHG</h6>
-                        <h6>ME HGDHDJN</h6>
+                        <h6>Bonjour</h6>
+                        <h6>Salut la famille !!</h6>
                         <br></br>
                       </div>
                       <div className="row">
@@ -696,23 +662,37 @@ class HomeSheeps extends Component {
                     </div>
                   ) : (
                     <div>
-                      <div className="row">
-                        {currentAnnonces.map((Annonces) => (
-                          <div className="col-lg-4  col-sm-6">
-                            <div id="anonce" class="product__item">
-                              <div
-                                class="product__item__pic set-bg"
-                                data-setbg={Annonces.images}
-                                // src="Images/sardi1.jpg"
-                              >
+                      <div className="col-lg-12  col-sm-12">
+                        <div id="anonce" class="product__item">
+                          <div className="row">
+                            <div className="col-lg-4 col-md-6 col-sm-4 col-xs-4">
+                              <div>
                                 <img
-                                  src={Annonces.image_face}
-                                  // src=Annonces.images
-                                  class="product__item__pic set-bg"
+                                  id="stylePostImage"
+                                  src="Images/Eleveur.jpg"
+                                  alt=""
                                 />
+                              </div>
+                            </div>
+                            <div className="col-lg-8 col-md-6 col-sm-8 col-xs-8">
+                              <br></br>
+                              <h5>ADAMOU FODI Salah</h5>
+                              <br></br>
+                            </div>
+                          </div>
+                          <div
+                            class="product__item__pic set-bg"
 
-                                <ul class="product__item__pic__hover">
-                                  {/* <li>
+                            // src="Images/sardi1.jpg"
+                          >
+                            <img
+                              src="Images/Eleveur.jpg"
+                              // src=Annonces.images
+                              class="product__item__pic set-bg"
+                            />
+
+                            <ul class="product__item__pic__hover">
+                              {/* <li>
                               <a
                                 id={Annonces._id}
                                 onClick={(e) =>
@@ -722,32 +702,69 @@ class HomeSheeps extends Component {
                                 <i className="fa fa-heart"></i>
                               </a>
                             </li> */}
-                                  <li>
-                                    <Link to={`/DetailsMouton/${Annonces._id}`}>
-                                      <a href="#">
-                                        <i class="fa fa-eye"></i>
-                                      </a>
-                                    </Link>
-                                  </li>
-                                </ul>
-                              </div>
-                              <div class="product__item__text">
-                                <h6>{"         " + Annonces.categorie}</h6>
-                                <h6>
-                                  {"         " + this.annonceVision(Annonces)}
-                                </h6>
-                                <h6>{"         " + Annonces.poids + " Kg"}</h6>
-                                <h6>{"         " + Annonces.age + " mois"}</h6>
-                                <h6>{"         " + Annonces.created_at}</h6>
-
-                                <h5 id="mad">
-                                  {"         " + Annonces.prix + " MAD"}
-                                </h5>
-                                <br></br>
-                              </div>
+                              <li>
+                                <Link to={`/DetailsMouton/`}>
+                                  <a href="#">
+                                    <i class="fa fa-eye"></i>
+                                  </a>
+                                </Link>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="product__item__text">
+                            <h6>HtHHG</h6>
+                            <h6>ME HGDHDJN</h6>
+                            <br></br>
+                          </div>
+                          <div className="row">
+                            <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                              <i
+                                id="like"
+                                class="fas fa-thumbs-up icon-cog fa-2x"
+                              ></i>
+                            </div>
+                            <div className="col-lg-9 col-md-8 col-sm-8 col-xs-8">
+                              <input
+                                id="recherchePlace"
+                                type="text"
+                                class="form-control"
+                                placeholder="Commentez .."
+                                onChange={this.onChange}
+                                name="commentaire"
+                              />
+                            </div>
+                            <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                              <i
+                                id="like"
+                                class="fas fa-comments icon-cog fa-2x"
+                              >
+                                {" "}
+                              </i>
+                            </div>
+                            <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                              <i
+                                id="like"
+                                class="fas fa-share icon-cog fa-2x"
+                              ></i>
                             </div>
                           </div>
-                        ))}
+                          {/** Comment section */}
+                          <div className="row">
+                            <div className="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                              <img
+                                id="styleCommentImage"
+                                src="Images/Eleveur.jpg"
+                                alt=""
+                              />
+                            </div>
+                            <div className="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                              <br></br>
+                              <h5>ADAMOU FODI Salah</h5>
+                              <br></br>
+                              <p>Je commente mon texte hhhhhhhhhhhhhhhhhhh</p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
 
                       <div className="center-div">
@@ -791,4 +808,4 @@ class HomeSheeps extends Component {
   }
 }
 
-export default HomeSheeps;
+export default Accueil;

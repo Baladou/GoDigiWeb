@@ -11,41 +11,19 @@ import { BrowserRouter, Route } from "react-router-dom";
 function App() {
   return (
     <div>
-      {/* <Header /> */}
-      {/* <Test />*/}
-      {/* <Home />  */}
-      {/* <AddMouton/> */}
-      {/* <HomeCommande /> */}
-      {/* <DetailsCommande /> */}
-      {/* <HomeEleveur /> */}
-      {/* <AddEleveur /> */}
-      {/* <DetailsEleveur /> */}
-      {/* <Container /> */}
       <BrowserRouter>
-        {/* <Route exact path="/login" component={login} />
-              <Route exact path="/regester" component={register} /> */}
         <Route
           path={[
-            "/commandesParStatut",
             "/login",
             "/register",
             "/changePassword",
             "/changePasswordLink",
             "/",
+            "/Acceuil",
             "/Description",
-            "/HomeSheepsParEleveur",
-            "/importRecuReste",
-            "/importRecuAvance",
-            "/Favoris",
-            "/DetailsCommande",
-            "/ToutesLesAnnonces",
-            "/Panier",
-            "/AnnoncesParEleveurs",
-            "/Commandes",
-            "/Commander",
-            "/AlerteCommande",
-            "/HomeCommande",
-            "/HomeEleveur",
+            "/Profile",
+            "/creerChatroom",
+            "/chatroom",
           ]}
           component={Container}
         />

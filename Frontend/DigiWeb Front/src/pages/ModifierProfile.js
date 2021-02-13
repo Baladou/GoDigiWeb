@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Select from "react-select";
-import { Link } from "react-router-dom";
 import Loader from "react-loader-spinner";
-import ReactPaginate from "react-paginate";
-class HomeSheepsParEleveur extends Component {
+
+class ModifierProfile extends Component {
   constructor() {
     super();
     // let redirect = false;
@@ -603,4 +602,4 @@ class HomeSheepsParEleveur extends Component {
   }
 }
 
-export default HomeSheepsParEleveur;
+export default ModifierProfile;

@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const HomeEleveur  = (props) => {
+const CreerChatroom = (props) => {
   const [chatrooms, setChatrooms] = React.useState([]);
   const getChatrooms = () => {
     axios
@@ -57,4 +57,4 @@ const HomeEleveur  = (props) => {
   );
 };
 
-export default HomeEleveur;
+export default CreerChatroom;

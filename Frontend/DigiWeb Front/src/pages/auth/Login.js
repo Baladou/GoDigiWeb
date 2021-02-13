@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { login } from "./UserFunctions";
+
 import Swal from "sweetalert2";
 import axios from "axios";
 import Loader from "react-loader-spinner";
@@ -7,7 +7,7 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      username: "",
+      login: "",
       password: "",
       redirect: true,
       loading : false,
@@ -28,34 +28,14 @@ class Login extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    /*const user = {
-      username: this.state.username,
+    const user = {
+      login: this.state.login,
       password: this.state.password,
-      grant_type="password"
-    };*/
-    var signIn = new FormData();
-    signIn.append('username',this.state.username)
-    signIn.append('password',this.state.password)
-    signIn.append('grant_type','password')
-
+    };
 
     this.setState({ loading: true }, () => {
     axios
-      .post("http://localhost:9191/oauth/token", {signIn},
-      {
-        headers: {
-          // "Access-Control-Allow-Origin": "*",
-          "Content-Type": "multipart/form-data",
-          //Accept: "application/json",
-          //Authorization: myToken,
-          "Access-Control-Allow-Origin": "*"
-        },
-        auth: {
-          username: 'mobile',
-          password: 'pin'
-        }
-      }
-      )
+      .post("http://127.0.0.1:8000/api/login", user)
       .then((res) => {
         console.log(res.data.success.token.token.user_id);
         localStorage.setItem("usertoken", res.data.success.token.token.user_id);
@@ -175,9 +155,11 @@ class Login extends Component {
                           />
                         </div>
                       ) : (
-                        <button type="submit" className="site-btn">
-                          Se connecter
-                        </button>
+                        <div className="col-lg-12 text-center">
+                          <button type="submit" className="site-btn1">
+                            Se connecter
+                          </button>
+                        </div>
                       )}
                       <p></p>
                     </div>
@@ -189,8 +171,7 @@ class Login extends Component {
                     <div>
                       <br />
                       <i className="text-right">
-                        Mot de passe oublié ? Vous
-                        pouvez créer un nouveau.{" "}
+                        Mot de passe oublié ? Vous pouvez créer un nouveau.{" "}
                       </i>
 
                       <a type="submit" href="/changePassword">
