@@ -51,12 +51,12 @@ public class UserController {
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 	
-	@PutMapping({"/{id}"})
+	/*@PutMapping({"/{id}"})
 	public ResponseEntity<Void> update(@RequestBody User user, @PathVariable String id){
 		user.setId(id);
 		userService.updateUser(user);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 		
-	}
+	}*/
 	
 }

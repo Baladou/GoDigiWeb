@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,10 +39,14 @@ public class LikeController {
 		System.out.println(likepost);
 		if(!getLikedPost(likepost).getBody().equals(Optional.empty())) {
 			List<User> users=new ArrayList<>();
+			User user = new User();
+	        user.setUser_name((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+	        System.out.println("-----------------------------------"+user.getUser_name());
 			for(int i=0;i<getLikedPost(likepost).getBody().get().getUserId().size();i++) {
+				System.out.println("------------"+getLikedPost(likepost).getBody().get().getUserId().get(i));
 				users.add(getLikedPost(likepost).getBody().get().getUserId().get(i));
 			}
-			users.add(likepost.getUserId().get(0));
+			users.add(user);
 			likepost.setUserId(users);
 		}
 		LikedPosts res=likedService.like(likepost);
@@ -52,9 +57,15 @@ public class LikeController {
 	public ResponseEntity<LikedPosts> unlike(@RequestBody LikedPosts unlikepost) {
 		if(getLikedPost(unlikepost)!=null) {
 			List<User> users=new ArrayList<>();
+			User user = new User();
+	        user.setUser_name((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 			for(int i=0;i<getLikedPost(unlikepost).getBody().get().getUserId().size();i++) {
-				if(!getLikedPost(unlikepost).getBody().get().getUserId().get(i).getId().equals(unlikepost.getUserId().get(0).getId())) {
+				System.out.println(getLikedPost(unlikepost).getBody().get().getUserId().get(i).getUser_name());
+
+				if(!getLikedPost(unlikepost).getBody().get().getUserId().get(i).getUser_name().equals(user.getUser_name())) {
+					System.out.println("-------jhbkjlk");
 					users.add(getLikedPost(unlikepost).getBody().get().getUserId().get(i));
+					System.out.println("jhbkjlk");
 				}
 			}
 			unlikepost.setUserId(users);

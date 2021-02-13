@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -30,9 +31,15 @@ public class CommentController {
 	@PostMapping({"/comment"})
 	public ResponseEntity<Comment> commenter(@RequestBody Comment comment){
 		comment.setDate(new Date());
+        System.out.println("dfqfs");
+
 		System.out.println(comment);
-		RestTemplate restTemplate=new RestTemplate();
-		User user=restTemplate.getForObject("http://localhost:9000/users/"+comment.getUserid().getId(),User.class);
+        User user = new User();
+        user.setUser_name((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        //user.setUser_id((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        System.out.println((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        System.out.println(user.getUser_name());
+        //System.out.println(user.getUser_id());
 		System.out.println(user+"-----------------------");
 		comment.setUserid(user);
 		Comment resultComment=commentService.commentePost(comment);
