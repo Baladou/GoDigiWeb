@@ -8,44 +8,19 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 
-@Document
 public class User {
-	@Id
-	private String id;
-	private String username;
-	@DBRef
-	private List<User> friends;
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public List<User> getFriends() {
-		return friends;
-	}
-	public void setFriends(List<User> friends) {
-		this.friends = friends;
-	}
-	public User(String id, String username, List<User> friends) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.friends = friends;
-	}
-	public User() {
-		super();
-	}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", friends=" + friends + "]";
-	}
+	
+    public String user_name;
+    
+
+	public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
 	
 	
 }

@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,11 +41,11 @@ public class PostController {
     @PostMapping("/posts")
     public ResponseEntity<?> createPost(
                                         @RequestParam("caption")  String caption,
-                                        final @RequestParam("image") MultipartFile image,@RequestParam("email")  String email ) throws IOException {
+                                        final @RequestParam("image") MultipartFile image ) throws IOException {
 
 
 
-        Post post = postService.createPost(email,image,caption);
+        Post post = postService.createPost((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal(),image,caption);
 
 
         URI location = ServletUriComponentsBuilder
@@ -60,9 +60,9 @@ public class PostController {
 
     @DeleteMapping("/posts/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePost(@PathVariable("id") String id,@PathVariable("email") String email/*@AuthenticationPrincipal Principal user*/) {
+    public void deletePost(@PathVariable("id") String id/*@AuthenticationPrincipal Principal user*/) {
         log.info("received a delete request for post id {} from user {}", id);
-        postService.deletePost(id,email);
+        postService.deletePost(id);
     }
 
     @GetMapping("/OnePost/posts/{id}")
@@ -91,8 +91,18 @@ public class PostController {
     public ResponseEntity<?> findUserPosts(@PathVariable("email") String email) {
         log.info("retrieving posts for user {}", email);
 
-        List<Post> posts = postService.postsByEmail(email);
+        List<Post> posts = postService.postsByUsername(email);
         log.info("found {} posts for user {}", posts.size(), email);
+
+        return ResponseEntity.ok(posts);
+    }
+    
+    @GetMapping("/posts")
+    public ResponseEntity<?> findUserPosts() {
+        //log.info("retrieving posts for user {}", email);
+
+        List<Post> posts = postService.postsByUsername((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        //log.info("found {} posts for user {}", posts.size(), email);
 
         return ResponseEntity.ok(posts);
     }
@@ -111,7 +121,7 @@ public class PostController {
     public ResponseEntity<?> updatePost( @RequestParam("caption")  String caption,
                               final @RequestParam("image") MultipartFile image, @PathVariable("id") String id,@RequestParam("email")  String email) {
 
-        Post post = postService.updatePost(id,image,caption,email);
+        Post post = postService.updatePost(id,image,caption);
         return ResponseEntity.ok(post);
     }
 

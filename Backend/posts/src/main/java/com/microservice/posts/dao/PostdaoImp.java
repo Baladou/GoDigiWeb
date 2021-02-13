@@ -5,6 +5,7 @@ import com.microservice.posts.web.exceptions.NotAllowedException;
 import com.microservice.posts.web.exceptions.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,8 +25,8 @@ public class PostdaoImp {
 
 
     public Post createPost(String email,MultipartFile image,String caption) {
-
-
+    	
+    	
         String filePath= null;
         try {
             filePath = CreateImage(image);
@@ -33,6 +34,7 @@ public class PostdaoImp {
             e.printStackTrace();
         }
         Post post = new Post(email,filePath,caption);
+        post.setUsername(email);
        //Post post= new Post("user","https","hello");
         post = Postdao.save(post);
        /* postEventSender.sendPostCreated(post);*/
@@ -43,15 +45,16 @@ public class PostdaoImp {
         return post;
     }
 
-    public void deletePost(String postId, String email) {
+    public void deletePost(String postId) {
         log.info("deleting post {}", postId);
+        String username=(String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Postdao
                 .findById(postId)
                 .map(post -> {
-                   if(!post.getEmail().equals(email)) {
-                        log.warn("user {} is not allowed to delete post id {}", email, postId);
-                        throw new NotAllowedException(email, "post id " + postId, "delete");
+                   if(!post.getUsername().equals(username)) {
+                        log.warn("user {} is not allowed to delete post id {}", username, postId);
+                        throw new NotAllowedException(username, "post id " + postId, "delete");
                     }
 
                     Postdao.delete(post);
@@ -72,9 +75,10 @@ public class PostdaoImp {
                 });
     }
 
-    public List<Post> postsByEmail(String email) {
 
-        return Postdao.findByEmailOrderByCreatedAtDesc(email);
+    public List<Post> postsByUsername(String username) {
+
+        return Postdao.findByUsernameOrderByCreatedAtDesc(username);
     }
 
     public List<Post> postsByIdIn(List<String> ids) {
@@ -93,14 +97,16 @@ public class PostdaoImp {
     }
 
 
-    public Post  updatePost(String id, MultipartFile image, String caption,String email){
+    public Post  updatePost(String id, MultipartFile image, String caption){
         log.info("received a request to create a post for image {}", caption);
+        
+        String username=(String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         return Postdao.findById(id)
                 .map(post -> {
-                    if(!post.getEmail().equals(email)) {
-                        log.warn("user {} is not allowed to delete post id {}", email, id);
-                        throw new NotAllowedException(email, "post id " + id, "delete");
+                    if(!post.getUsername().equals(username)) {
+                        log.warn("user {} is not allowed to delete post id {}", username, id);
+                        throw new NotAllowedException(username, "post id " + id, "delete");
                     }
 
                         File fileToDelete = new File(post.getImageUrl());
