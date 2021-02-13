@@ -34,14 +34,14 @@ public class CommentController {
         System.out.println("dfqfs");
 
 		System.out.println(comment);
-        User user = new User();
+        /*User user = new User();
         user.setUser_name((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         //user.setUser_id((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         System.out.println((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         System.out.println(user.getUser_name());
         //System.out.println(user.getUser_id());
-		System.out.println(user+"-----------------------");
-		comment.setUserid(user);
+		System.out.println(user+"-----------------------");*/
+		comment.setUsername((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		Comment resultComment=commentService.commentePost(comment);
 		return new ResponseEntity<Comment>(resultComment,HttpStatus.CREATED);
 	}

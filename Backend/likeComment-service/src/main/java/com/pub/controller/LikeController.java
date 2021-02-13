@@ -36,19 +36,33 @@ public class LikeController {
 	
 	@PutMapping({"post/like"})
 	public ResponseEntity<LikedPosts> like(@RequestBody LikedPosts likepost) {
-		System.out.println(likepost);
+		System.out.println(getLikedPost(likepost).getBody().equals(Optional.empty()));
+		
 		if(!getLikedPost(likepost).getBody().equals(Optional.empty())) {
-			List<User> users=new ArrayList<>();
-			User user = new User();
-	        user.setUser_name((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-	        System.out.println("-----------------------------------"+user.getUser_name());
-			for(int i=0;i<getLikedPost(likepost).getBody().get().getUserId().size();i++) {
-				System.out.println("------------"+getLikedPost(likepost).getBody().get().getUserId().get(i));
-				users.add(getLikedPost(likepost).getBody().get().getUserId().get(i));
+			System.out.println("dadadad");
+			List<String> users=new ArrayList<>();
+			System.out.println("dadadadaaaaaaaaaaaaaaa");
+			System.out.println("--------"+getLikedPost(likepost).getBody().get().getUsername());
+			System.out.println("ppppppppppppppp");
+			if(getLikedPost(likepost).getBody().get().getUsername()!=null) {
+			for(int i=0;i<getLikedPost(likepost).getBody().get().getUsername().size();i++) {
+				users.add(getLikedPost(likepost).getBody().get().getUsername().get(i));
+				System.out.println("tttttttttt");
+
 			}
-			users.add(user);
-			likepost.setUserId(users);
+			}
+			
+			System.out.println("1111111");
+
+			users.add((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+			likepost.setUsername(users);
 		}
+		else {
+			List<String> users=new ArrayList<>();
+			users.add(likepost.getUsername().get(0));
+			likepost.setUsername(users);
+		}
+		
 		LikedPosts res=likedService.like(likepost);
 		return new ResponseEntity<LikedPosts>(res,HttpStatus.CREATED);
 	}
@@ -56,19 +70,14 @@ public class LikeController {
 	@PutMapping({"post/unlike"})
 	public ResponseEntity<LikedPosts> unlike(@RequestBody LikedPosts unlikepost) {
 		if(getLikedPost(unlikepost)!=null) {
-			List<User> users=new ArrayList<>();
-			User user = new User();
-	        user.setUser_name((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-			for(int i=0;i<getLikedPost(unlikepost).getBody().get().getUserId().size();i++) {
-				System.out.println(getLikedPost(unlikepost).getBody().get().getUserId().get(i).getUser_name());
-
-				if(!getLikedPost(unlikepost).getBody().get().getUserId().get(i).getUser_name().equals(user.getUser_name())) {
-					System.out.println("-------jhbkjlk");
-					users.add(getLikedPost(unlikepost).getBody().get().getUserId().get(i));
-					System.out.println("jhbkjlk");
+			List<String> users=new ArrayList<>();
+			for(int i=0;i<getLikedPost(unlikepost).getBody().get().getUsername().size();i++) {
+				
+				if(!getLikedPost(unlikepost).getBody().get().getUsername().get(i).equals((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal())) {
+					users.add(getLikedPost(unlikepost).getBody().get().getUsername().get(i));
 				}
 			}
-			unlikepost.setUserId(users);
+			unlikepost.setUsername(users);
 		}
 		LikedPosts res=likedService.like(unlikepost);
 		return new ResponseEntity<LikedPosts>(res,HttpStatus.CREATED);
