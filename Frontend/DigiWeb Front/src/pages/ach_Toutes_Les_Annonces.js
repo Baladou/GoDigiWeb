@@ -333,7 +333,7 @@ class HomeSheeps extends Component {
 
                     <h6 id="gras" className="latest-product__item">
                       <a id="Accbar" href="./Description">
-                        Profile
+                        Mes Publications
                       </a>
                     </h6>
                     <br></br>
@@ -348,13 +348,14 @@ class HomeSheeps extends Component {
 
                     <h6 id="gras" className="latest-product__item">
                       <a id="Accbar" href="./Description">
-                        Profile
+                        Modifier Profile
                       </a>
                     </h6>
-
                     <br></br>
 
-                    
+                  
+
+                    <br></br>
 
                     {/* <label className="latest-product__item">
                       <input name="withImages" type="checkbox" /> Avec photos

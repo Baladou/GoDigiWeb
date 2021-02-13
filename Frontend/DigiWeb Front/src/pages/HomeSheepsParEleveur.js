@@ -141,7 +141,7 @@ class HomeSheepsParEleveur extends Component {
             // "x-access-token": token, // the token is a variable which holds the token
           },
           params: {
-            id_eleveur: this.props.location.state.id.id,
+            
             // statut: "disponible",
             order_by: "race",
             order_mode: "asc",
@@ -392,64 +392,15 @@ class HomeSheepsParEleveur extends Component {
         <section className="">
           <div className="container">
             <div className="row">
-              <div className="col-lg-3 col-md-6">
+              <div className="col-lg-6 col-md-6">
                 <div id="rechercher" className="col-lg-12">
                   <br></br>
                   <br></br>
                   <div className="sidebar__item">
-                    <h4>Rechercher</h4>
+                    <h4>Modifier le Profil</h4>
 
                     <h6 id="gras" className="latest-product__item">
-                      Espece
-                    </h6>
-                    <div className="row">
-                      <div className="col-lg-12 col-md-12">
-                        {/* <input
-                          type="text"
-                          className="latest-product__item"
-                          placeholder="Choisissez la race"
-                          onChange={this.onChange}
-                          name="race"
-                        /> */}
-                        <Select
-                          value={selectedOptionCategorie}
-                          onChange={this.handleChangeCategorie}
-                          options={optionsCategorie}
-                          placeholder="Espece"
-                          required
-                          // className="Select"
-                        />
-                        <br></br>
-                      </div>
-                    </div>
-
-                    <h6 id="gras" className="latest-product__item">
-                      Race
-                    </h6>
-                    <div className="row">
-                      <div className="col-lg-12 col-md-12">
-                        {/* <input
-                          type="text"
-                          className="latest-product__item"
-                          placeholder="Choisissez la race"
-                          onChange={this.onChange}
-                          name="race"
-                        /> */}
-                        <Select
-                          id="recherchePlace"
-                          value={selectedOptionRace}
-                          onChange={this.handleChangeRace}
-                          options={optionsRace}
-                          placeholder=" Race"
-                          required
-                          // className="Select"
-                        />
-                        <br></br>
-                      </div>
-                    </div>
-
-                    <h6 id="gras" className="latest-product__item">
-                      Prix
+                      Username
                     </h6>
                     <div className="row">
                       <div className="col-lg-12 col-md-12">
@@ -458,19 +409,57 @@ class HomeSheepsParEleveur extends Component {
                           type="text"
                           class="form-control"
                           placeholder=" Budget min"
-                          name="prix_min"
+                          name="username"
                           onChange={this.onChange}
                         />
                       </div>
                     </div>
+                    <br></br>
 
+                    <h6 id="gras" className="latest-product__item">
+                      Old Password
+                    </h6>
                     <div className="row">
                       <div className="col-lg-12 col-md-12">
                         <input
                           id="recherchePlace"
-                          type="text"
+                          type="password"
                           class="form-control"
-                          placeholder=" Budget max"
+                          placeholder="************"
+                          name="password_o"
+                          onChange={this.onChange}
+                        />
+                      </div>
+                    </div>
+                    <br></br>
+
+                    <h6 id="gras" className="latest-product__item">
+                      New Password
+                    </h6>
+                    <div className="row">
+                      <div className="col-lg-12 col-md-12">
+                        <input
+                          id="recherchePlace"
+                          type="password"
+                          class="form-control"
+                          placeholder="************"
+                          name="password_n"
+                          onChange={this.onChange}
+                        />
+                      </div>
+                    </div>
+                    <br></br>
+
+                    <h6 id="gras" className="latest-product__item">
+                      Email
+                    </h6>
+                    <div className="row">
+                      <div className="col-lg-12 col-md-12">
+                        <input
+                          id="recherchePlace"
+                          type="email"
+                          class="form-control"
+                          placeholder=" email"
                           name="prix_max"
                           onChange={this.onChange}
                         />
@@ -479,51 +468,24 @@ class HomeSheepsParEleveur extends Component {
                     <br></br>
 
                     <h6 id="gras" className="latest-product__item">
-                      Poids Environ
+                      Telephone
                     </h6>
                     <div className="row">
                       <div className="col-lg-12 col-md-12">
                         <input
                           id="recherchePlace"
-                          type="text"
+                          type="number"
                           class="form-control"
                           placeholder=" Poids min"
-                          name="poids_min"
+                          name="Telephone"
                           onChange={this.onChange}
                         />
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="col-lg-12 col-md-12">
-                        <input
-                          id="recherchePlace"
-                          type="text"
-                          class="form-control"
-                          placeholder=" Poids max"
-                          name="poids_max"
-                          onChange={this.onChange}
-                        />
-                      </div>
-                    </div>
+                    
                     <br></br>
 
-                    <h6 id="gras" className="latest-product__item">
-                      Ville
-                    </h6>
-                    <div className="row">
-                      <div className="col-lg-12 col-md-12">
-                        <Select
-                          value={selectedOptionVille}
-                          onChange={this.handleChangeVille}
-                          options={optionsVille}
-                          placeholder=" Ville"
-
-                          // className="Select"
-                        />
-                        <br></br>
-                        <br></br>
-                      </div>
-                    </div>
+              
                     <div className="row">
                       <div className="col-lg-12 col-md-12">
                         {/* <button className="btn btn-success" onClick={this.handelChercher}> Rechercher </button><br/> */}
@@ -533,7 +495,7 @@ class HomeSheepsParEleveur extends Component {
                           onClick={this.handelChercher}
                         >
                           {" "}
-                          Rechercher{" "}
+                          Modifier{" "}
                         </button>
                         <br></br>
                         <br></br>
@@ -573,26 +535,17 @@ class HomeSheepsParEleveur extends Component {
                   <div className="row">
                     <div className="col-lg-4 col-md-5"></div>
                     <div className="col-lg-12 col-md-12">
-                      <h3>
-                        Espace éleveur :{" "}
-                        {this.props.location.state.id.nom +
-                          " " +
-                          this.props.location.state.id.prenom}
-                      </h3>{" "}
+                      
                       <br />
                       <div className="filter__found text-left">
                         <h6>
-                          <span id="nbEspece">
-                            {this.state.Annonces.length}
-                          </span>{" "}
+                          
                           Têtes de moutons au total
                         </h6>
                         <br />
                       </div>
                       <h6 id="centrerT">
-                        <b id="nbEspece">{vendu.length}</b> Vendus{" "}
-                        <b id="nbEspece">{dispo.length}</b> Disponibles{" "}
-                        <b id="nbEspece">{reserv.length}</b> Réservés
+                        
                       </h6>
                     </div>
                   </div>
@@ -622,46 +575,8 @@ class HomeSheepsParEleveur extends Component {
                       <div className="row">
                         {currentAnnonces.map((Annonces) => (
                           <div className="col-lg-4 col-md-6 col-sm-6">
-                            {console.log(Annonces.image_face)}
-                            <div id="anonce" className="product__item">
-                              <div
-                                className="product__item__pic set-bg"
-                                data-setbg={Annonces.images}
-                                // src="Images/sardi1.jpg"
-                              >
-                                <img
-                                  src={Annonces.image_face}
-                                  // src=Annonces.images
-                                  className="product__item__pic set-bg"
-                                />
-
-                                <ul className="product__item__pic__hover">
-                                  {/* <li>
-                              <a href="">
-                                <i className="fa fa-heart"></i>
-                              </a>
-                            </li> */}
-                                  <li>
-                                    <Link to={`/DetailsMouton/${Annonces._id}`}>
-                                      <a href="#">
-                                        <i class="fa fa-eye"></i>
-                                      </a>
-                                    </Link>
-                                  </li>
-                                </ul>
-                              </div>
-                              <div className="product__item__text">
-                                <h6>{"         " + Annonces.race}</h6>
-                                <h6>{"         " + Annonces.poids + " Kg"}</h6>
-                                <h6>{"         " + Annonces.age + " mois"}</h6>
-                                <h5>{"         " + Annonces.prix + " MAD"}</h5>
-                                <br></br>
-                                <h5 className="text-danger">
-                                  {"         " + Annonces.statut}
-                                </h5>
-                                <br></br>
-                              </div>
-                            </div>
+                            
+                             
                           </div>
                         ))}
                       </div>
@@ -669,19 +584,7 @@ class HomeSheepsParEleveur extends Component {
                       <div className="center-div">
                         <nav className="row">
                           <ul className="pagination center-div">
-                            {this.state.nombrePages.map((number) => (
-                              <li
-                                key={number}
-                                className="page-item stylePagination"
-                              >
-                                <a
-                                  onClick={() => this.paginate(number)}
-                                  className="page-link"
-                                >
-                                  {number}
-                                </a>
-                              </li>
-                            ))}
+                            
                           </ul>
                         </nav>
                       </div>

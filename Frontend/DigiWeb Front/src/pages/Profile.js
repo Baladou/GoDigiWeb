@@ -94,9 +94,28 @@ class Profile extends Component {
                   <div className="row">
                     <div className="col-lg-12 col-md-12">
                       <div className="filter__found text-left">
-                        <h3>
-                          DETAILS DU COMPTE : 
-                        </h3>
+                        <h3>DETAILS DU COMPTE </h3>
+                        <br></br>
+                        <div className="row">
+                          <div className="col-lg-2 col-md-2"> UERNAME : </div>
+                          <div className="col-lg-8 col-md-8"> solahfodi </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-lg-2 col-md-2"> EMAIL : </div>
+                          <div className="col-lg-8 col-md-8">
+                            {" "}
+                            solahfodi@gmail.com{" "}
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-lg-2 col-md-2"> MOBILE : </div>
+                          <div className="col-lg-8 col-md-8"> 0602843034 </div>
+                        </div>
+                        <br></br>
+                        <br></br>
+                        <a type="submit" href="/ModifierProfile" className="site-btn1">
+                          Modifier Profil
+                        </a>
                       </div>
                     </div>
                   </div>
