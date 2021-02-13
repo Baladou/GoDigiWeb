@@ -57,11 +57,7 @@ public class LikeController {
 			users.add((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 			likepost.setUsername(users);
 		}
-		else {
-			List<String> users=new ArrayList<>();
-			users.add(likepost.getUsername().get(0));
-			likepost.setUsername(users);
-		}
+
 		
 		LikedPosts res=likedService.like(likepost);
 		return new ResponseEntity<LikedPosts>(res,HttpStatus.CREATED);

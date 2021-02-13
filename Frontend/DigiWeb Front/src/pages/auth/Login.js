@@ -7,7 +7,7 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      login: "",
+      username: "",
       password: "",
       redirect: true,
       loading : false,
@@ -28,14 +28,34 @@ class Login extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const user = {
-      login: this.state.login,
+    /*const user = {
+      username: this.state.username,
       password: this.state.password,
-    };
+      grant_type="password"
+    };*/
+    var signIn = new FormData();
+    signIn.append('username',this.state.username)
+    signIn.append('password',this.state.password)
+    signIn.append('grant_type','password')
+
 
     this.setState({ loading: true }, () => {
     axios
-      .post("http://127.0.0.1:8000/api/login", user)
+      .post("http://localhost:9191/oauth/token", {signIn},
+      {
+        headers: {
+          // "Access-Control-Allow-Origin": "*",
+          "Content-Type": "multipart/form-data",
+          //Accept: "application/json",
+          //Authorization: myToken,
+          "Access-Control-Allow-Origin": "*"
+        },
+        auth: {
+          username: 'mobile',
+          password: 'pin'
+        }
+      }
+      )
       .then((res) => {
         console.log(res.data.success.token.token.user_id);
         localStorage.setItem("usertoken", res.data.success.token.token.user_id);

@@ -8,7 +8,7 @@ class SignUp extends Component {
     super();
     this.state = {
       // first_name: "",
-      // last_name: "",
+      username: "",
       email: "",
       password: "",
       telephone: "",
@@ -23,12 +23,12 @@ class SignUp extends Component {
    
      return axios
        .post(
-         "http://127.0.0.1:8000/api/register",
+         "http://localhost:9191/oauth/users",
          {
+           username: newUser.username,
            email: newUser.email,
            password: newUser.password,
            telephone: newUser.telephone,
-           role: "Consommateur",
          },
          {
            headers: {
@@ -36,63 +36,14 @@ class SignUp extends Component {
              "Content-Type": "application/json",
              Accept: "application/json",
              //Authorization: myToken,
-             // "Access-Control-Allow-Origin": "*",
+             "Access-Control-Allow-Origin": "*"
            },
          }
        )
        .then((res) => {
-        
-         const consommateur = {
-           civilisation: "Mr",
-           nom: this.state.nom,
-           prenom: this.state.prenom,
-           tel: this.state.telephone,
-           email: this.state.email,
-           adresse: this.state.adresse,
-           favoris: [],
-           panier: [],
-           id_user: res.data.success.token.token.user_id,
-         };
 
-         axios
-           .post("http://127.0.0.1:8000/api/consommateur", consommateur, {
-             headers: {
-               Accept: "application/json",
-               "Content-Type": "application/json",
-               //"Access-Control-Allow-Origin": "*",
-               // Authorization: myToken,
-             },
-           })
-           .then((res) => {
-            
-             const to = this.state.email;
-             //const myToken = `Bearer ` + localStorage.getItem("myToken");
-             const content =
-               "votre compte a été créé votre mot de passe est:" +
-               this.state.password;
-             const subject = "votre compte ANOC MARKETPLACE a été créé  ";
-             axios
-               .post(
-                 "http://127.0.0.1:8000/api/sendmail/" +
-                   to +
-                   "/" +
-                   content +
-                   "/" +
-                   subject,
-                 {
-                   headers: {
-                     Accept: "application/json",
-                     "Content-Type": "application/json",
-                     //"Access-Control-Allow-Origin": "*",
-                     // Authorization: myToken,
-                   },
-                 }
-               )
-               .then((resultat) => {
-                 
-                 console.log(resultat);
-               });
-           });
+        console.log(this.username);
+        
          this.props.history.push("login");
 
          Swal.fire({
@@ -106,20 +57,7 @@ class SignUp extends Component {
 
            confirmButtonText: "Ok!",
          });
-      
-     /*       .catch((error) => {
-    Swal.fire({
-      title: "Compte Erreur",
-      text:
-        "email numéro renseignés existants",
-      icon: "error",
-      width: 400,
-      heightAuto: false,
-      confirmButtonColor: "#7fad39",
 
-      confirmButtonText: "Ok!",
-    }); 
-}) */
    });
   };
 
@@ -131,7 +69,7 @@ class SignUp extends Component {
     this.setState({ loading: true }, () => {
     const user = {
       // first_name: this.state.first_name,
-      // last_name: this.state.last_name,
+      username: this.state.username,
       email: this.state.email,
       password: this.state.password,
       telephone: this.state.telephone,
@@ -145,7 +83,7 @@ class SignUp extends Component {
         console.log(err);
         Swal.fire({
           /* title: "Erreur de connection",*/
-          text: "Email ou numéro de télephone déjà existant",
+          text: "Email déjà existant",
           icon: "error",
           width: 400,
           heightAuto: false,
@@ -179,20 +117,11 @@ class SignUp extends Component {
                     </center>
                     <br />{" "}
                   </div>
-                  <div className="col-lg-6 col-md-6">
+                  <div className="col-lg-12 col-md-12">
                     <input
                       type="text"
                       placeholder="Nom d'utilisateur*"
                       name="username"
-                      onChange={this.onChange}
-                      required
-                    />
-                  </div>
-                  <div className="col-lg-6 col-md-6">
-                    <input
-                      type="text"
-                      placeholder="Nom"
-                      name="nom"
                       onChange={this.onChange}
                       required
                     />
